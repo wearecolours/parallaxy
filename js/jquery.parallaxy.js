@@ -21,7 +21,7 @@
 
 
 +function ($) { "use strict";
-  
+
   // Utility
   if ( typeof Object.create !== 'function' ) {
     Object.create = function( obj ) {
@@ -32,7 +32,7 @@
   }
 
   // init GLOBAL nailPluginCollection, used across all .nail plugins.
-  if (typeof window.nailPluginCollection !== 'object'){
+  if (typeof window.nailPluginCollection !== 'object' && window.ignoreParallaxy !== true){
   window.nailPluginCollection = Object.create({
     'update' : function(){},
     'resize' : function(){}
@@ -60,11 +60,11 @@
 
     this.resized();
     this.scrolled($.fn.parallaxy.Viewport.windowPostionY, $.fn.parallaxy.Viewport.windowHeight);
-    
+
   }
 
   Parallaxy.prototype.resized = function() {
-    
+
     this.elementHeight = this.element.outerHeight();
     this.elementWidth = this.element.outerWidth();
 
@@ -106,6 +106,9 @@
   $.fn.parallaxy.update = function( ){
     // Add new parallaxy elements ( i.e. new content added via ajax )
     $.fn.parallaxy.Elements = [];
+    if(window.ignoreParallaxy === true){
+      return false;
+    }
     $('[data-parallaxy]').each(function() {
       $(this).parallaxy();
     });
@@ -113,7 +116,7 @@
   }
 
   $.fn.parallaxy.Constructor = Parallaxy
-  
+
   $.fn.parallaxy.Viewport = {
     'windowPostionY' : $(window).scrollTop(),
     'windowHeight' :  (typeof window.innerHeight != 'undefined') ? window.innerHeight : document.documentElement.clientHeight
@@ -121,14 +124,13 @@
 
   // PARALLAXY DATA-API
   // ============
-
   $.fn.parallaxy.update();
 
   // EVENT LISTENERS
   // ============
 
   $.fn.parallaxy.resize = function(){
-    // update viewport, fallback on 
+    // update viewport, fallback on
     if (typeof window.innerHeight != 'undefined') {
       $.fn.parallaxy.Viewport.windowHeight = window.innerHeight;
     } else {
@@ -142,15 +144,17 @@
     }
 
   }
-  
-  $(window).on('scroll', function(){
-    // update scroll position
-    $.fn.parallaxy.Viewport.windowPostionY = $(window).scrollTop();
-    // update all parallxy heights data
-    for(var i=0; i<$.fn.parallaxy.Elements.length; i++){
-      $.fn.parallaxy.Elements[i].scrolled($.fn.parallaxy.Viewport.windowPostionY, $.fn.parallaxy.Viewport.windowHeight);
-    }
-  });
+
+  if(window.ignoreParallaxy !== true){
+    $(window).on('scroll', function(){
+      // update scroll position
+      $.fn.parallaxy.Viewport.windowPostionY = $(window).scrollTop();
+      // update all parallxy heights data
+      for(var i=0; i<$.fn.parallaxy.Elements.length; i++){
+        $.fn.parallaxy.Elements[i].scrolled($.fn.parallaxy.Viewport.windowPostionY, $.fn.parallaxy.Viewport.windowHeight);
+      }
+    });
+  }
 
   // bind events and trigger first time.
   $(document).on('parallaxy', $.fn.parallaxy.update()).trigger('parallaxy');
