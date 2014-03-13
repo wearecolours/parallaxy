@@ -50,21 +50,21 @@
 
     this.element = element;
 
-    if(this.element.data('parallaxy-div')==true){
-      this.image = $(element).find('.parallaxy-element');
-      this.isdiv = true;
-      this.translateX = 0;
-      if(this.element.data('parallaxy-speed')==undefined){
-        this.fixedSpeed=1; // 0 == fastest, 1 == standstill
-      } else {
-        this.fixedSpeed=this.element.data('parallaxy-speed');
-      }
-    } else {
+    if(this.element.data('parallaxy-image')==true){
       this.image = $(element).find('.parallaxy-element').addClass('parallaxy-image').find('img');
       this.isdiv = false;
       // Autospeed set or disabled?
       if(this.element.data('parallaxy-speed')==undefined){
         this.fixedSpeed=0.5; // 0 == fastest, 1 == standstill
+      } else {
+        this.fixedSpeed=this.element.data('parallaxy-speed');
+      }
+    } else {
+      this.image = $(element).find('.parallaxy-element');
+      this.isdiv = true;
+      this.translateX = 0;
+      if(this.element.data('parallaxy-speed')==undefined){
+        this.fixedSpeed=1; // 0 == fastest, 1 == standstill
       } else {
         this.fixedSpeed=this.element.data('parallaxy-speed');
       }
