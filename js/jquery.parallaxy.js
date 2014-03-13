@@ -124,6 +124,9 @@
       // calculate scroll value
       var _scroll = -((this.elementY)-windowPostionY)*this.fixedSpeed;
       this.image.css('transform', 'translate('+this.translateX+'px,'+_scroll+'px)');
+      this.element.removeClass("outside-of-bounds");
+    } else {
+      this.element.addClass("outside-of-bounds");
     }
 
   }
