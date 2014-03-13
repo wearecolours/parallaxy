@@ -18,8 +18,6 @@
  * ======================================================================== */
 
 
-
-
 +function ($) { "use strict";
 
   // Utility
@@ -70,6 +68,16 @@
       }
     }
 
+    this.pageFixedHeader = $(this.element.data('parallaxy-page-header'));
+
+    var _pageHeaderHeight = 0;
+
+    $.each(this.pageFixedHeader, function() {
+        _pageHeaderHeight += $(this).height();
+    });
+
+    this.pageHeaderHeight = _pageHeaderHeight;
+
     this.resized();
     this.scrolled($.fn.parallaxy.Viewport.windowPostionY, $.fn.parallaxy.Viewport.windowHeight);
 
@@ -79,6 +87,14 @@
 
     this.elementHeight = this.element.outerHeight();
     this.elementWidth = this.element.outerWidth();
+
+    var _pageHeaderHeight = 0;
+
+    $.each(this.pageFixedHeader, function() {
+        _pageHeaderHeight += $(this).height();
+    });
+
+    this.pageHeaderHeight = _pageHeaderHeight;
 
     if(!this.isdiv){
 
@@ -99,6 +115,9 @@
   }
 
   Parallaxy.prototype.scrolled = function (windowPostionY, windowHeight) {
+
+    windowPostionY += this.pageHeaderHeight;
+    windowHeight -= this.pageHeaderHeight;
 
     // only bother continue if view of parallax in within the viewport of the browser
     if(this.elementY+this.elementHeight>windowPostionY && this.elementY<windowHeight+windowPostionY){
