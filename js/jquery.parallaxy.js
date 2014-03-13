@@ -48,14 +48,26 @@
 
   var Parallaxy = function (element, ignoreupdate) {
 
-    this.element = $(element);
-    this.image = $(element).find('.parallaxy-image').find('img');
+    this.element = element;
 
-    // Autospeed set or disabled?
-    if(this.element.data('parallaxy-speed')==undefined){
-      this.fixedSpeed=0.5; // 0 == fastest, 1 == standstill
+    if(this.element.data('parallaxy-div')==true){
+      this.image = $(element).find('.parallaxy-element');
+      this.isdiv = true;
+      this.translateX = 0;
+      if(this.element.data('parallaxy-speed')==undefined){
+        this.fixedSpeed=1; // 0 == fastest, 1 == standstill
+      } else {
+        this.fixedSpeed=this.element.data('parallaxy-speed');
+      }
     } else {
-      this.fixedSpeed=this.element.data('parallaxy-speed');
+      this.image = $(element).find('.parallaxy-element').addClass('parallaxy-image').find('img');
+      this.isdiv = false;
+      // Autospeed set or disabled?
+      if(this.element.data('parallaxy-speed')==undefined){
+        this.fixedSpeed=0.5; // 0 == fastest, 1 == standstill
+      } else {
+        this.fixedSpeed=this.element.data('parallaxy-speed');
+      }
     }
 
     this.resized();
@@ -68,17 +80,20 @@
     this.elementHeight = this.element.outerHeight();
     this.elementWidth = this.element.outerWidth();
 
-    this.imageHeight = (this.elementHeight)+(($.fn.parallaxy.Viewport.windowHeight-this.elementHeight)*this.fixedSpeed);
-    this.image.height(this.imageHeight)
-              .width('auto');
+    if(!this.isdiv){
 
-    if(this.elementWidth/this.image.width() > 1){
-        this.image.width(this.elementWidth)
-                  .height('auto');
-        this.imageHeight = this.image.outerHeight();
+      this.imageHeight = (this.elementHeight)+(($.fn.parallaxy.Viewport.windowHeight-this.elementHeight)*this.fixedSpeed);
+      this.image.height(this.imageHeight)
+                .width('auto');
+
+      if(this.elementWidth/this.image.width() > 1){
+          this.image.width(this.elementWidth)
+                    .height('auto');
+          this.imageHeight = this.image.outerHeight();
+      }
+      this.translateX = -(this.image.outerWidth()-this.element.outerWidth())/2;
     }
 
-    this.translateX = -(this.image.outerWidth()-this.element.outerWidth())/2;
     this.elementY = this.element.offset().top;
 
   }
@@ -122,9 +137,6 @@
     'windowHeight' :  (typeof window.innerHeight != 'undefined') ? window.innerHeight : document.documentElement.clientHeight
   };
 
-  // PARALLAXY DATA-API
-  // ============
-  $.fn.parallaxy.update();
 
   // EVENT LISTENERS
   // ============
@@ -157,7 +169,7 @@
   }
 
   // bind events and trigger first time.
-  $(document).on('parallaxy', $.fn.parallaxy.update()).trigger('parallaxy');
+  $(document).on('parallaxy', $.fn.parallaxy.update).trigger('parallaxy');
 
   // extend nailPluginCollection object with functions from zoombie
   window.nailPluginCollection.resize = (function(_super) {
