@@ -81,6 +81,11 @@
     this.resized();
     this.scrolled($.fn.parallaxy.Viewport.windowPostionY, $.fn.parallaxy.Viewport.windowHeight);
 
+    // if image, update once more..
+    if(!this.isdiv){
+      this.resized()
+    };
+
   }
 
   Parallaxy.prototype.resized = function() {
