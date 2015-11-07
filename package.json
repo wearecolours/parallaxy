@@ -1,0 +1,34 @@
+{
+  "name": "parallaxy",
+  "description": "Adds parallax effect to images and backgrounds",
+  "version": "0.1.0",
+  "author": "Ivar Borthen",
+  "main": "dist/jquery.parallaxy.min.js",
+  "keywords": [
+    "jquery",
+    "parallax",
+    "background-parallax",
+    "image-parallax"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wearecolours/jquery.parallaxy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wearecolours/jquery.parallaxy/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browser-sync": "^2.1.3",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-cssmin": "^0.14.0",
+    "grunt-contrib-uglify": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-notify": "^0.4.1"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4"
+  }
+}
