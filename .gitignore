@@ -1,0 +1,6 @@
+# Global OSX ignores
+.DS_Store
+
+# Build
+node_modules/
+tmp/

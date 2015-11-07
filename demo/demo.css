@@ -1,0 +1,18 @@
+@import "https://necolas.github.io/normalize.css/3.0.2/normalize.css";
+
+* {
+	box-sizing: border-box;
+}
+
+.parallaxy {
+	height: 450px;
+	margin: 500px 0;
+}
+
+.parallax-element {
+	background-color: red;
+}
+
+.parallaxy-element *:not(img); {
+	text-align: center;
+}
