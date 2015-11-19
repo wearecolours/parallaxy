@@ -4,25 +4,42 @@
 		<title>DEMO - jquery.parallaxy.js</title>
 		<link rel="stylesheet" type="text/css" href="parallaxy.css" />
 		<link rel="stylesheet" type="text/css" href="demo.css" />
-		<script src="jquery.min.js"></script>
 	</head>
 	<body>
-
-		<div class="parallaxy" data-parallaxy="true">
-	    	<div class="parallaxy-element">
-				<h1>Demo parallaxy</h1>
-				<h2>hello</h2>
-				<h1>Demo parallaxy</h1>
-				<h3>hello</h3>
+		<div style="height:500px"></div>
+		<p>Scroll downwards</p>
+		<div data-parallaxy class="mountains">
+			<div data-parallaxy-ignore=true class="headers">
+				<h1>Nice view!</h1>
+				<h3>Almost breathtaking</h3>
 			</div>
+			<img src="alps/alps.jpg" />
 		</div>
 
-		<div class="parallaxy" data-parallaxy="true" data-parallaxy-image="true">
-			<div class="parallaxy-element">
-				<img src="demo.jpg">
+		<div data-parallaxy class="mountains">
+			<div data-parallaxy-ignore=true class="headers">
+				<h1>Nice view!</h1>
+				<h3>Almost breathtaking</h3>
 			</div>
+			<img src="alps/alps.jpg" />
 		</div>
-
-		<script src="jquery.parallaxy.js"></script>
+		
+		<div style="height:500px"></div>
+		<p>Scroll downwards</p>
+		<!--
+		<div data-parallaxy class="mountains">
+			<div data-parallaxy-ignore=true class="headers">
+				<h1>Nice view!</h1>
+				<h3>Almost breathtaking</h3>
+			</div>
+			<img src="mountainview/trees.svg" />
+			<img src="mountainview/mountain_front.svg" />
+			<img src="mountainview/mountain_middle.svg" />
+			<img src="mountainview/mountain_back.svg" />
+		</div>
+		-->
+		<div style="height:500px"></div>
+		<p>Scroll downwards</p>
+		<script src="parallaxy.js"></script>
 	</body>
 </html>

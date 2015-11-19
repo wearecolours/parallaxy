@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 		uglify: {
 			dist: {
 				files: {
-					'dist/jquery.parallaxy.min.js': ['src/jquery.parallaxy.js']
+					'dist/parallaxy.min.js': ['src/parallaxy.js']
 				}
 			}
 		},
@@ -29,8 +29,7 @@ module.exports = function(grunt) {
 				expand: true,
 				flatten: true,
 				src: [
-					'node_modules/jquery/dist/jquery.min.js',
-					'src/jquery.parallaxy.js',
+					'src/parallaxy.js',
 					'src/parallaxy.css'
 				],
     			dest: 'demo/',
@@ -41,7 +40,7 @@ module.exports = function(grunt) {
 		browserSync: {
 			bsFiles: {
 				src : [
-					'demo/jquery.parallaxy.js',
+					'demo/parallaxy.js',
 					'demo/parallaxy.css',
 				]
 			},
@@ -57,7 +56,7 @@ module.exports = function(grunt) {
 		watch: {
 			demo: {
 				files: [
-					'src/jquery.parallaxy.js',
+					'src/parallaxy.js',
 					'src/parallaxy.css'
 				],
 				tasks: ['copy']
