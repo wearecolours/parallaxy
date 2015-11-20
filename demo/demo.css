@@ -3,6 +3,7 @@ html,body {
 }
 .mountains {
 	background : lightblue;
+	margin-bottom : 100px;
 }
 .mountains .headers {
 	font-family : 'Arial';

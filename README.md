@@ -22,7 +22,9 @@ Add **parallaxy.min.js** to the bottom of the `<body>` like this:
 This is an very early version of parallaxy.
 
 
-### Usage 1
+## How to Use
+
+### Usage
 
 In this example the image will have a parallaxy effect.
 
@@ -33,6 +35,14 @@ In this example the image will have a parallaxy effect.
 	</div>
 	<img src="image.jpg" />
 </div>
+```
+
+### After DOM change
+
+If the DOM has changed and you want to reset Parallaxy, just run;
+
+```
+Parallaxy.refresh();
 ```
 
 
