@@ -36,6 +36,11 @@ var Parallaxy = (function () {
       this.update();
     }
 
+    this.refresh = function(){
+      this.allElements = [];
+      this.init();
+    }
+
     this.getElements = function(){
 
       var elements = document.querySelectorAll('[data-parallaxy]'),
@@ -89,7 +94,7 @@ var Parallaxy = (function () {
               this.allElements[i].childrens[j]['speed'] = this.allElements[i].minspeed + (((1 / (this.allElements[i].childrens.length-1)) * j) * (speedDifference) );
             }
           } else {
-            this.allElements[i].childrens[j]['speed'] = parseFloat(_el.getAttribute('data-parallaxy-speed'));
+            this.allElements[i].childrens[j]['speed'] = Math.min(1, Math.max(0, parseFloat(_el.getAttribute('data-parallaxy-speed'))));
           }
         }
       }
@@ -125,15 +130,16 @@ var Parallaxy = (function () {
         for(j=0, m=childrens.length; j<m; j++){
           if(childrens[j].scalable && childrens[j].ready){
 
-            var activeViewport = ( window.innerHeight + parentHeight ) * ( 1-childrens[j].speed );
+            var activeViewport = ( window.innerHeight + parentHeight ) * ( childrens[j].speed ); // correct if speed === 0.5 ??????
 
-            var _minimumImageHeight = activeViewport;
+            var _minimumImageHeight = activeViewport + parentHeight - (parentHeight * 2 * childrens[j].speed);
             var _minimumImageWidth = parentWidth;
 
             // base scaling on width or height?
             var minimumScalingX = _minimumImageWidth / childrens[j].element.naturalWidth;
             var minimumScalingY = _minimumImageHeight / childrens[j].element.naturalHeight;
 
+            childrens[j].adjustVerticalAlignToCenter = minimumScalingX < minimumScalingY ? 0 : (childrens[j].element.naturalHeight * (minimumScalingX-minimumScalingY)) / 2;
             childrens[j].scale = Math.max(minimumScalingX, minimumScalingY);
 
           }
@@ -159,7 +165,7 @@ var Parallaxy = (function () {
 
               // based on offset we should be able to calculate Y position...
 
-              var _translateY = -(childrens[j].speed) * _offsetInViewPort;
+              var _translateY = -((childrens[j].speed) * _offsetInViewPort) - childrens[j].adjustVerticalAlignToCenter;
               var _translateX = -((childrens[j].element.naturalWidth * childrens[j].scale) - this.allElements[i].container.offsetWidth) * 0.5;
 
               // translate the element

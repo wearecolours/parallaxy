@@ -1,6 +1,6 @@
 ### What it is
 
-Adds parallax effect to images and backgrounds.
+Adds parallax effect to images.
 
 ### Installation
 
@@ -12,19 +12,18 @@ npm install parallaxy --save
 
 Add **parallaxy.min.js** to the bottom of the `<body>` like this:
 
-```html
-		<script src="parallaxy.min.js"></script>
-	</body>
+```
+<script src="parallaxy.min.js"></script>
 ```
 
 
 ### Note
 
-This is an very early version of parallaxy. Docs and code are a bit premature and will soon get an update..
+This is an very early version of parallaxy.
 
 
+### Usage 1
 
-### Usage
 In this example the image will have a parallaxy effect.
 
 ```html
@@ -39,15 +38,17 @@ In this example the image will have a parallaxy effect.
 
 ### Options
 
-Options can be passed via data attributes. Append the option name to `data-parallaxy-`, as in `data-parallaxy-speed=""`.
+Options must be passed via data-attributes. Append the option name to `data-parallaxy-`, as in `data-parallaxy-speed="0.25"`.
 
-| Name       | Type     | Default | Description        |
-|------------|----------|---------|--------------------|
-|            |          |         |                    |
+| Name                   | Type      | Default     | Description                                   |
+|------------------------|-----------|-------------|-----------------------------------------------|
+| data-parallaxy-speed	 | Float     | 0.5         | Adjust parallaxy effect from 0-1 (none-max)   |
+| data-parallaxy-ignore	 | Boolean   | false       | Ignore parallaxy effect on this element       |
+
 
 ### Browser Support
 
-Coming soon
+Coming soon. Uses CSS translate2D to scale and position images.
 
 
 ### License
