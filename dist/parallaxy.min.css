@@ -1,1 +1,1 @@
-[data-parallaxy]{position:relative;overflow:hidden}.parallaxy{position:absolute;top:0;bottom:0;left:50%;width:100%;z-index:-1}
+[data-parallaxy]{position:relative;overflow:hidden}[data-parallaxy]>*{position:absolute;display:block;top:0;z-index:1;-moz-transform-origin:left top;-ms-transform-origin:left top;-webkit-transform-origin:left top;transform-origin:left top}[data-parallaxy]>[data-parallaxy-ignore]{position:relative;z-index:2}

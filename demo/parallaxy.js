@@ -27,8 +27,6 @@ Should autocalculated speeds substract values when another element has its "own"
 
 var Parallaxy = (function () {
 
-  console.log('runds..');
-
   function parallaxy() {
 
     this.allElements = [];
@@ -127,14 +125,15 @@ var Parallaxy = (function () {
         for(j=0, m=childrens.length; j<m; j++){
           if(childrens[j].scalable && childrens[j].ready){
 
-            var _minimumImageHeight = ( ( window.innerHeight + (parentHeight) ) * ( 1-childrens[j].speed ) ) + parentHeight;
+            var activeViewport = ( window.innerHeight + parentHeight ) * ( 1-childrens[j].speed );
+
+            var _minimumImageHeight = activeViewport;
             var _minimumImageWidth = parentWidth;
 
             // base scaling on width or height?
             var minimumScalingX = _minimumImageWidth / childrens[j].element.naturalWidth;
             var minimumScalingY = _minimumImageHeight / childrens[j].element.naturalHeight;
 
-            console.log('minimumScalingX', minimumScalingX);
             childrens[j].scale = Math.max(minimumScalingX, minimumScalingY);
 
           }
@@ -144,25 +143,25 @@ var Parallaxy = (function () {
 
     this.updateScroll = function(){
 
-      console.log('updateScroll');
       var windowScrollPosition = (window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0),
           childrens,
-          offsetY,
+          _offsetInViewPort,
           i,j,l,m;
 
       for(i=0, l=this.allElements.length; i<l; i++){
 
         childrens = this.allElements[i].childrens;
-        offsetY = ((this.allElements[i].container.offsetTop - windowScrollPosition) + this.allElements[i].container.offsetHeight) / (window.innerHeight+(this.allElements[i].container.offsetHeight)); // returns value 0-1 (%) from min to max parallaxy scroll.
+        var _offsetInViewPort = this.allElements[i].container.offsetTop - windowScrollPosition;
 
-        if(offsetY>0 && offsetY<1){
+
           for(j=0, m=childrens.length; j<m; j++){
             if(childrens[j].ready){
 
               // based on offset we should be able to calculate Y position...
-              var _translateY = -((childrens[j].element.naturalHeight * childrens[j].scale) - this.allElements[i].container.offsetHeight) * offsetY;
+
+              var _translateY = -(childrens[j].speed) * _offsetInViewPort;
               var _translateX = -((childrens[j].element.naturalWidth * childrens[j].scale) - this.allElements[i].container.offsetWidth) * 0.5;
-              console.log(_translateX);
+
               // translate the element
               childrens[j].element.style.webkitTransform =
               childrens[j].element.style.MozTransform =
@@ -172,7 +171,7 @@ var Parallaxy = (function () {
 
             }
           }
-        }
+
       }
       
     }
@@ -188,5 +187,3 @@ var Parallaxy = (function () {
   return new parallaxy();
 
 }());
-
-console.log(Parallaxy);
