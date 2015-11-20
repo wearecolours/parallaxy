@@ -1,29 +1,8 @@
-/* ========================================================================
- * github.com/wearecolours/parallaxy
- * ========================================================================
- * Copyright 2015 Ivar Borthen.
- * No dependencies needed.
- * ======================================================================== */
-
-/* Usage
-
---container--
-data-parallaxy=true : inits parallaxy. (Autostarts)
-data-parallaxy-maxspeed : maxspeed for parallaxy elements ( childrens data-parallaxy-speed will overwrite this)
-data-parallaxy-minspeed : minspeed for parallaxy elements ( childrens data-parallaxy-speed will overwrite this)
-
---first-childs--
-data-parallaxy-ignore=true : ignore this element in parallaxy
-data-parallaxy-speed=XXX : makes element scroll according to this speed. overwrites autocalculated speeds.
-data-parallaxy-dontresize=true : ignore resizing.
-
-Update it:
-Parallaxy.update();
-
-Note to self:
-Should autocalculated speeds substract values when another element has its "own" speed manually set?
-
-*/
+ /*
+ * Authors: Ivar Borthen
+ * https://github.com/wearecolours/parallaxy
+ * License: MIT license
+ */
 
 var Parallaxy = (function () {
 
