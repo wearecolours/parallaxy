@@ -109,7 +109,6 @@ var Parallaxy = (function () {
         for(j=0, m=childrens.length; j<m; j++){
           if(childrens[j].scalable && childrens[j].ready){
 
-            console.log(childrens[j].speed);
             var activeViewport = ( window.innerHeight + parentHeight ) * ( childrens[j].speed ); // correct if speed === 0.5 ??????
 
             var _minimumImageHeight = activeViewport + parentHeight - (parentHeight * 2 * childrens[j].speed);
@@ -121,9 +120,6 @@ var Parallaxy = (function () {
 
             childrens[j].adjustVerticalAlignToCenter = minimumScalingX < minimumScalingY ? 0 : (childrens[j].element.naturalHeight * (minimumScalingX-minimumScalingY)) / 2;
             childrens[j].scale = Math.max(minimumScalingX, minimumScalingY);
-
-            console.log('minimumScalingY', minimumScalingY);
-            console.log('adjustVerticalAlignToCenter', childrens[j].adjustVerticalAlignToCenter);
 
           }
         }
