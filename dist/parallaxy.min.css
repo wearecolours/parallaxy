@@ -1,1 +1,1 @@
-[data-parallaxy]{position:relative;overflow:hidden}[data-parallaxy]>:not([data-parallaxy-ignore]){position:absolute;display:block;top:0;-webkit-transform-origin:left top;-moz-transform-origin:left top;-ms-transform-origin:left top;transform-origin:left top}
+[data-parallaxy]{position:relative;overflow:hidden}[data-parallaxy]>:not([data-parallaxy-ignore]){position:absolute;display:block;top:0;-webkit-transform-origin:left top;-moz-transform-origin:left top;-ms-transform-origin:left top;transform-origin:left top}[data-parallaxy-ignore]{position:relative}
