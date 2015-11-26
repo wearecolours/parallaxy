@@ -1,14 +1,16 @@
 {
   "name": "parallaxy",
-  "description": "Adds parallax effect to images",
-  "version": "1.2.3",
+  "description": "Adds parallax effect to images and videos",
+  "version": "1.2.4",
   "author": "Ivar Borthen",
   "main": "dist/parallaxy.min.js",
   "keywords": [
     "javascript",
     "parallax",
     "image-parallax",
-    "video-parallax"
+    "video-parallax",
+    "img",
+    "video"
   ],
   "repository": {
     "type": "git",
