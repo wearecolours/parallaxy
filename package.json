@@ -1,7 +1,7 @@
 {
   "name": "parallaxy",
   "description": "Adds parallax effect to images",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "author": "Ivar Borthen",
   "main": "dist/parallaxy.min.js",
   "keywords": [

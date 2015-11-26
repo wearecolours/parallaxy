@@ -65,8 +65,8 @@ var Parallaxy = (function () {
                     this.allElements[i].childrens[k].ready = false;
                     this.allElements[i].childrens[k].element.addEventListener('load', this.loadedImage.bind(this, this.allElements[i].childrens[k]));
                   } else {
-                    this.allElements[i].childrens[k].originalWidth = this.allElements[i].childrens[k].element.style.height = childrens[j].style.naturalHeight; 
-                    this.allElements[i].childrens[k].originalHeight = this.allElements[i].childrens[k].element.style.width = childrens[j].style.naturalWidth;
+                    this.allElements[i].childrens[k].originalWidth = this.allElements[i].childrens[k].element.style.width = childrens[j].naturalWidth;
+                    this.allElements[i].childrens[k].originalHeight = this.allElements[i].childrens[k].element.style.height = childrens[j].naturalHeight;
                   }
                 }
               }
