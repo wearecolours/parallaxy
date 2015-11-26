@@ -41,21 +41,33 @@ var Parallaxy = (function () {
         for(j=0, m=childrens.length; j<m; j++){
           if(childrens[j].nodeType === 1){ // is an element
             if(childrens[j].getAttribute('data-parallaxy-ignore') === null){ // should we ignore this element?
-              isImage = (childrens[j].tagName === 'IMG');
+              isImage = (childrens[j].tagName === 'IMG' || childrens[j].tagName === 'VIDEO');
               this.allElements[i].childrens[k] = {
                 'element' : childrens[j],
                 'scalable' : (childrens[j].getAttribute('data-parallaxy-dontresize') === null ? isImage : false),
                 'ready' : true,
-                'scale' : 1
+                'scale' : 1,
+                'originalWidth' : 0,
+                'originalHeight' : 0
               };
               if(isImage){
-                if(childrens[j].naturalWidth === 0){
-                  // image not loaded yet... add a loader event for image.
-                  this.allElements[i].childrens[k].ready = false;
-                  this.allElements[i].childrens[k].element.addEventListener('load', this.loadedImage.bind(this, this.allElements[i].childrens[k]));
+                if(childrens[j].tagName === 'VIDEO'){
+                  if(childrens[j].videoWidth === 0){
+                    this.allElements[i].childrens[k].ready = false;
+                    this.allElements[i].childrens[k].element.addEventListener('loadedmetadata', this.loadedImage.bind(this, this.allElements[i].childrens[k]));
+                  } else {
+                    this.allElements[i].childrens[k].originalWidth = this.allElements[i].childrens[k].element.style.width = childrens[j].videoWidth;
+                    this.allElements[i].childrens[k].originalHeight = this.allElements[i].childrens[k].element.style.height = childrens[j].videoHeight; 
+                  }
                 } else {
-                  this.allElements[i].childrens[k].element.style.height = this.allElements[i].childrens[k].element.style.naturalHeight; 
-                  this.allElements[i].childrens[k].element.style.width = this.allElements[i].childrens[k].element.style.naturalWidth;
+                  if(childrens[j].naturalWidth === 0){
+                    // image not loaded yet... add a loader event for image.
+                    this.allElements[i].childrens[k].ready = false;
+                    this.allElements[i].childrens[k].element.addEventListener('load', this.loadedImage.bind(this, this.allElements[i].childrens[k]));
+                  } else {
+                    this.allElements[i].childrens[k].originalWidth = this.allElements[i].childrens[k].element.style.height = childrens[j].style.naturalHeight; 
+                    this.allElements[i].childrens[k].originalHeight = this.allElements[i].childrens[k].element.style.width = childrens[j].style.naturalWidth;
+                  }
                 }
               }
               k++;
@@ -82,8 +94,15 @@ var Parallaxy = (function () {
 
     this.loadedImage = function(_array){
       _array.ready = true;
-      _array.element.style.height = _array.element.style.naturalHeight; 
-      _array.element.style.width = _array.element.style.naturalWidth; 
+      if(_array.element.tagName === 'VIDEO'){
+        _array.element.setAttribute('width', _array.element.videoWidth);
+        _array.element.setAttribute('height', _array.element.videoHeight);
+        _array.originalWidth = _array.element.videoWidth;
+        _array.originalHeight = _array.element.videoHeight;
+      } else {
+        _array.originalHeight = _array.element.style.height = _array.element.style.naturalHeight; 
+        _array.originalWidth = _array.element.style.width = _array.element.style.naturalWidth;
+      }
       this.update();
     }
 
@@ -115,10 +134,10 @@ var Parallaxy = (function () {
             var _minimumImageWidth = parentWidth;
 
             // base scaling on width or height?
-            var minimumScalingX = _minimumImageWidth / childrens[j].element.naturalWidth;
-            var minimumScalingY = _minimumImageHeight / childrens[j].element.naturalHeight;
+            var minimumScalingX = _minimumImageWidth / childrens[j].originalWidth;
+            var minimumScalingY = _minimumImageHeight / childrens[j].originalHeight;
 
-            childrens[j].adjustVerticalAlignToCenter = minimumScalingX < minimumScalingY ? 0 : (childrens[j].element.naturalHeight * (minimumScalingX-minimumScalingY)) / 2;
+            childrens[j].adjustVerticalAlignToCenter = minimumScalingX < minimumScalingY ? 0 : (childrens[j].originalHeight * (minimumScalingX-minimumScalingY)) / 2;
             childrens[j].scale = Math.max(minimumScalingX, minimumScalingY);
 
           }
@@ -145,7 +164,7 @@ var Parallaxy = (function () {
               // based on offset we should be able to calculate Y position...
 
               var _translateY = -((childrens[j].speed) * _offsetInViewPort) - childrens[j].adjustVerticalAlignToCenter;
-              var _translateX = -((childrens[j].element.naturalWidth * childrens[j].scale) - this.allElements[i].container.offsetWidth) * 0.5;
+              var _translateX = -((childrens[j].originalWidth * childrens[j].scale) - this.allElements[i].container.offsetWidth) * 0.5;
 
               // translate the element
               childrens[j].element.style.webkitTransform =
