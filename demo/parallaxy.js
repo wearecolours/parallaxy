@@ -178,9 +178,94 @@ var Parallaxy = (function () {
       
     }
 
+    /**** Smooth scrollinging when using mousewheels ****/
+    var smoothScrollWheelEvent = function(e) {
+      this.scrollActions(document.body, -(e.wheelDeltaY*0.6) || 0);
+      e.preventDefault();
+    }
+
+    this.scrollActions = function(e, _speed){
+      
+      this.smoothScrollFlippedDirections(_speed);
+
+      this.smoothScrollStoredEvents.push({
+          sp: _speed,
+          ypos: _speed < 0 ? .999 : -.999,
+          timed: new Date
+      });
+
+      if (this.smoothScrollActiveAnimation)
+          return;
+
+      var i = function () {
+
+        var s = new Date;
+        var u = 0;
+
+        for (var a = 0; a < this.smoothScrollStoredEvents.length; a++) {
+
+              var f = this.smoothScrollStoredEvents[a];
+              var l = s - f.timed;
+              var c = l >= this.smoothScrollAnimationTime;
+              var h = this.smoothScrollBezier(c ? 1 : l / this.smoothScrollAnimationTime);
+              var d = f.sp * h - f.ypos >> 0;
+
+              u += d;
+              f.ypos += d;
+              if (c) {
+                  this.smoothScrollStoredEvents.splice(a, 1);
+                  a--
+              }
+          }
+          e.scrollTop += u;
+
+          if (this.smoothScrollStoredEvents.length)
+              window.requestAnimationFrame(i.bind(this));
+          else
+              this.smoothScrollActiveAnimation = false;
+
+        };
+
+      window.requestAnimationFrame(i.bind(this));
+      this.smoothScrollActiveAnimation = true;
+
+    }
+
+    this.smoothScrollFlippedDirections = function(t) {
+        t = t > 0 ? 1 : -1;
+        if (this.smoothScrollSpeed !== t) {
+            this.smoothScrollSpeed = t;
+            this.smoothScrollStoredEvents = [];
+        }
+    }
+
+    this.smoothScrollBezier = function(e) {
+        if (e >= 1) return 1;
+        if (e <= 0) return 0;
+        var n, r;
+        e = e * 6.8;
+        if (e < 1) {
+            return e - (1 - Math.exp(-e));
+        } else {
+            n = Math.exp(-1);
+            e -= 1;
+            r = 1 - Math.exp(-e);
+            return n + r * (1 - n);
+        }
+    }
+
+    this.smoothScrollAnimationTime = 500; // length of animation
+    this.smoothScrollSpeed = 0;
+    this.smoothScrollStoredEvents = [];
+    this.smoothScrollActiveAnimation = false;
+
     document.addEventListener("DOMContentLoaded", this.init.bind(this));
     window.addEventListener("resize", this.update.bind(this));
     window.addEventListener("scroll", this.updateScroll.bind(this));
+
+    if(document.querySelectorAll('[data-parallaxy-ignoresmoothscroll]').length===0){
+      window.addEventListener("mousewheel", smoothScrollWheelEvent.bind(this), false);
+    }
 
     return this.prototype;
 
@@ -189,3 +274,5 @@ var Parallaxy = (function () {
   return new parallaxy();
 
 }());
+
+
