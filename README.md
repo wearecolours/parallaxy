@@ -29,11 +29,11 @@ This is an very early version of parallaxy.
 In this example the image will have a parallaxy effect.
 
 ```html
-<div data-parallaxy="true">
-	<div data-parallaxy-ignore="true">
+<div data-parallaxy>
+	<img src="image.jpg">
+	<div data-parallaxy-ignore>
 		<h1>Content above</h1>
 	</div>
-	<img src="image.jpg" />
 </div>
 ```
 
