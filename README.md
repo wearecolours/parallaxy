@@ -1,6 +1,6 @@
 ### What it is
 
-Adds parallax effect to images.
+Adds parallax effect to images and videos.
 
 ### Installation
 
