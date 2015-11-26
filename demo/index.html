@@ -1,57 +1,44 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>DEMO - jquery.parallaxy.js</title>
+		<title>DEMO - parallaxy.js</title>
 		<link rel="stylesheet" type="text/css" href="parallaxy.css" />
 		<link rel="stylesheet" type="text/css" href="demo.css" />
 	</head>
 	<body>
+
 		<h1>Simple examples where we adjust speed on the 2nd and 3rd image..</h1>
-		<div data-parallaxy class="mountains">
-			<div data-parallaxy-ignore=true class="headers">
-				<h1>Nice view!</h1>
+
+		<div data-parallaxy class="container">
+			<img src="alps.jpg" alt="Alps">
+			<div data-parallaxy-ignore class="caption">
+				<h2>Nice view!</h2>
 				<h3>Almost breathtaking, default speed</h3>
 			</div>
-			<img src="alps/alps.jpg" />
 		</div>
 
-		<div data-parallaxy class="mountains">
-			<div data-parallaxy-ignore=true class="headers">
-				<h1>Nice view!</h1>
-				<h3>lower speed gives smaller effect...</h3>
-			</div>
-			<video autoplay>
-			  <source src="http://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-			  <source src="http://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
-			Your browser does not support the video tag.
+		<div data-parallaxy class="container">
+			<video autoplay loop muted>
+				<source src="http://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+				<source src="http://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+				Your browser does not support the video tag.
 			</video>
+			<div data-parallaxy-ignore class="caption">
+				<h2>Nice view!</h2>
+				<h3>...lower speed gives smaller effect</h3>
+			</div>
 		</div>
 
-		<div data-parallaxy class="mountains">
-			<div data-parallaxy-ignore=true class="headers">
-				<h1>Nice view!</h1>
-				<h3>and then it stopped!</h3>
+		<div data-parallaxy class="container">
+			<img src="alps.jpg" alt="Alps" data-parallaxy-speed="1">
+			<div data-parallaxy-ignore class="caption">
+				<h2>Nice view!</h2>
+				<h3>...and then it stopped</h3>
 			</div>
-			<img src="alps/alps.jpg" data-parallaxy-speed=1 />
 		</div>
-		
-		<div style="height:500px"></div>
-		<h1>Enjoy:)</h1>
-		<div style="height:500px"></div>
-		<!--
-		<div data-parallaxy class="mountains">
-			<div data-parallaxy-ignore=true class="headers">
-				<h1>Nice view!</h1>
-				<h3>Almost breathtaking</h3>
-			</div>
-			<img src="mountainview/trees.svg" />
-			<img src="mountainview/mountain_front.svg" />
-			<img src="mountainview/mountain_middle.svg" />
-			<img src="mountainview/mountain_back.svg" />
-		</div>
-		-->
+
+		<h2 style="margin: 400px 0;">Enjoy! :)</h2>
 
 		<script src="parallaxy.js"></script>
-
 	</body>
 </html>
