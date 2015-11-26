@@ -95,8 +95,6 @@ var Parallaxy = (function () {
     this.loadedImage = function(_array){
       _array.ready = true;
       if(_array.element.tagName === 'VIDEO'){
-        _array.element.setAttribute('width', _array.element.videoWidth);
-        _array.element.setAttribute('height', _array.element.videoHeight);
         _array.originalWidth = _array.element.videoWidth;
         _array.originalHeight = _array.element.videoHeight;
       } else {
