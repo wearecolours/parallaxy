@@ -50,17 +50,17 @@ Parallaxy.refresh();
 
 Options must be passed via data-attributes. Append the option name to `data-parallaxy-`, as in `data-parallaxy-speed="0.25"`.
 
-| Name                              | Type      | Default   | Description                                  |
-|-----------------------------------|-----------|-----------|----------------------------------------------|
-| data-parallaxy-speed	            | Float     | 0.5       | Adjust parallaxy effect from 0-1 (none-max)  |
-| data-parallaxy-ignore	            | Boolean   | false     | Ignore parallaxy effect on this element      |
+| Name          | Type      | Default   | Description                                  |
+|---------------|-----------|-----------|----------------------------------------------|
+| speed	        | Float     | 0.5       | Adjust parallaxy effect from 0-1 (none-max)  |
+| ignore	    | Boolean   | false     | Ignore parallaxy effect on this element      |
 
 
 Global options (data-attribute):
 
-| Name                              | Type      | Default   | Description                                  |
-|-----------------------------------|-----------|-----------|----------------------------------------------|
-| data-parallaxy-ignoresmoothscroll	| Boolean   | null      | Ignore smoothMouseWheel. Place anywhere      |
+| Name                 | Type      | Default   | Description                                  |
+|----------------------|-----------|-----------|----------------------------------------------|
+| ignoresmoothscroll   | Boolean   | null      | Ignore smoothMouseWheel. Place anywhere      |
 
 
 ### Browser Support
@@ -70,5 +70,5 @@ Coming soon. Uses CSS translate2D to scale and position images.
 
 ### License
 
-The code is available under the [MIT License](https://github.com/cferdinandi/smooth-scroll/blob/master/LICENSE.md).
+The code is available under the [MIT License](https://github.com/wearecolours/parallaxy/blob/master/LICENSE.md).
 
